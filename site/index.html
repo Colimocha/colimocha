@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xiangyu Shi — Software Engineer</title>
+    <meta name="description" content="Software engineer with an M.S. in Computer Science from RIT. REST APIs, event-driven cloud infrastructure, real-time services, full-stack products, and applied AI.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700&family=Inter:opsz,wght@14..32,400..700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Sans+Mono+SC:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#ffffff',
+              'on-primary': '#000000',
+              ink: '#ffffff',
+              'ink-muted': '#999999',
+              canvas: '#090909',
+              'surface-1': '#141414',
+              'surface-2': '#1c1c1c',
+              hairline: '#262626',
+              'hairline-soft': '#1a1a1a',
+              'accent-blue': '#0099ff',
+              'gradient-magenta': '#d44df0',
+              'gradient-violet': '#6a4cf5',
+              'gradient-orange': '#ff7a3d',
+              'gradient-coral': '#ff5577',
+              success: '#22c55e',
+            },
+            fontFamily: {
+              display: ['"Mona Sans"', '"Noto Sans SC"', 'Inter', 'system-ui', 'sans-serif'],
+              sans: ['"Inter Variable"', '"Noto Sans SC"', 'Inter', 'system-ui', 'sans-serif'],
+              mono: ['"JetBrains Mono"', '"Noto Sans Mono SC"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+            },
+            fontSize: {
+              'display-xxl': ['clamp(44px, 9vw, 110px)', { lineHeight: '0.85', letterSpacing: '-0.05em' }],
+              'display-xl': ['clamp(40px, 7vw, 85px)', { lineHeight: '0.95', letterSpacing: '-0.05em' }],
+              'display-lg': ['clamp(34px, 5vw, 62px)', { lineHeight: '1.0', letterSpacing: '-0.05em' }],
+              'display-md': ['32px', { lineHeight: '1.13', letterSpacing: '-0.031em' }],
+              headline: ['22px', { lineHeight: '1.2', letterSpacing: '-0.036em' }],
+              subhead: ['24px', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+              'body-lg': ['18px', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+              body: ['15px', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+              'body-sm': ['16px', { lineHeight: '1.45', letterSpacing: '-0.01em' }],
+              caption: ['15px', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+              micro: ['14px', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+              button: ['14px', { lineHeight: '1.0', letterSpacing: '-0.01em' }],
+            },
+            spacing: {
+              xxs: '4px',
+              xs: '8px',
+              sm: '12px',
+              md: '15px',
+              lg: '20px',
+              xl: '30px',
+              xxl: '40px',
+              section: '96px',
+            },
+            borderRadius: {
+              xs: '4px',
+              sm: '6px',
+              md: '10px',
+              lg: '15px',
+              xl: '20px',
+              xxl: '30px',
+              pill: '100px',
+              full: '9999px',
+            },
+            backgroundImage: {
+              'code-violet': 'linear-gradient(135deg, #4a3a8f 0%, #1e2857 100%)',
+              'code-emerald': 'linear-gradient(135deg, #0e9f6e 0%, #0a3d4d 100%)',
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      ::selection {
+        background: #0099ff;
+        color: #ffffff;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid #0099ff;
+        outline-offset: 2px;
+      }
+
+      .anchor {
+        scroll-margin-top: 80px;
+      }
+
+      html {
+        color-scheme: dark;
+      }
+
+      html.i18n-pending body {
+        visibility: hidden;
+      }
+
+      /* CJK glyphs are taller than Latin — relax the tight display line-heights in Chinese */
+      html[data-lang="zh"] .text-display-xxl {
+        line-height: 1.1;
+        font-size: clamp(44px, 9vw, 100px);
+      }
+
+      html[data-lang="zh"] .text-display-xl {
+        line-height: 1.15;
+      }
+
+      html[data-lang="zh"] .text-display-md {
+        line-height: 1.25;
+      }
+
+      .bg-grid {
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 48px 48px;
+      }
+
+      @keyframes blink {
+
+        0%,
+        100% {
+          opacity: 1;
+        }
+
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .animate-blink {
+        animation: blink 1.1s steps(1) infinite;
+      }
+
+      @keyframes floaty {
+
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      .animate-floaty {
+        animation: floaty 6s ease-in-out infinite;
+      }
+    </style>
+    <script>
+        (function () {
+          function resolveLang() {
+            try { var s = localStorage.getItem('lang'); if (s === 'en' || s === 'zh') return s; } catch (e) { }
+            var nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+            return nav.indexOf('zh') === 0 ? 'zh' : 'en';
+          }
+          var lang = resolveLang();
+          window.__i18nResolve = resolveLang;
+          document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+          document.documentElement.setAttribute('data-lang', lang);
+          document.documentElement.classList.add('i18n-pending');
+        })();
+    </script>
+  </head>
+
+  <body class="bg-canvas text-ink font-sans antialiased">
+
+    <!-- Top nav -->
+    <header class="sticky top-0 z-40 border-b border-hairline-soft bg-canvas/90 backdrop-blur">
+      <div class="mx-auto flex h-14 max-w-[1199px] items-center justify-between px-lg">
+        <a href="#top" class="text-caption font-medium tracking-tight" data-i18n="brand">Xiangyu Shi</a>
+        <nav class="hidden items-center gap-xl md:flex" aria-label="Primary">
+          <a href="#about" class="text-caption text-ink-muted transition-colors hover:text-ink" data-i18n="nav.about">About</a>
+          <a href="#roles" class="text-caption text-ink-muted transition-colors hover:text-ink" data-i18n="nav.roles">Roles</a>
+          <a href="#education" class="text-caption text-ink-muted transition-colors hover:text-ink" data-i18n="nav.education">Education</a>
+          <a href="#skills" class="text-caption text-ink-muted transition-colors hover:text-ink" data-i18n="nav.skills">Skills</a>
+          <a href="#experience" class="text-caption text-ink-muted transition-colors hover:text-ink" data-i18n="nav.experience">Experience</a>
+          <a href="#projects" class="text-caption text-ink-muted transition-colors hover:text-ink" data-i18n="nav.projects">Projects</a>
+          <a href="#contact" class="text-caption text-ink-muted transition-colors hover:text-ink" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <div class="flex items-center gap-xs">
+          <div class="relative" data-lang-switch>
+            <button type="button" class="flex items-center gap-xs rounded-full bg-surface-1 px-md py-[6px] text-caption text-ink transition-colors hover:bg-surface-2" aria-haspopup="menu" aria-expanded="false" data-lang-toggle>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"></path>
+                <path d="M2 12h20"></path>
+              </svg>
+              <span data-lang-current>EN</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </button>
+            <div class="absolute right-0 top-full z-50 mt-xs hidden min-w-[204px] overflow-hidden rounded-md border border-hairline bg-surface-2 shadow-[0_10px_30px_rgba(0,0,0,0.45)]" role="menu" data-lang-menu>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="en" class="flex w-full items-center justify-between px-md py-sm text-left text-caption text-ink transition-colors hover:bg-surface-1">English</button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="zh" class="flex w-full items-center justify-between px-md py-sm text-left text-caption text-ink transition-colors hover:bg-surface-1">Simplified Chinese (中文)</button>
+            </div>
+          </div>
+          <button class="flex size-10 items-center justify-center rounded-full bg-surface-1 text-ink md:hidden" aria-label="Toggle menu" aria-expanded="false" data-menu-toggle>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <line x1="4" y1="7" x2="20" y2="7"></line>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="17" x2="20" y2="17"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <nav class="hidden border-t border-hairline-soft bg-canvas px-lg py-md md:hidden" data-menu aria-label="Mobile">
+        <a href="#about" class="block py-xs text-body text-ink" data-i18n="nav.about">About</a>
+        <a href="#roles" class="block py-xs text-body text-ink" data-i18n="nav.roles">Roles</a>
+        <a href="#education" class="block py-xs text-body text-ink" data-i18n="nav.education">Education</a>
+        <a href="#skills" class="block py-xs text-body text-ink" data-i18n="nav.skills">Skills</a>
+        <a href="#experience" class="block py-xs text-body text-ink" data-i18n="nav.experience">Experience</a>
+        <a href="#projects" class="block py-xs text-body text-ink" data-i18n="nav.projects">Projects</a>
+        <a href="#contact" class="block py-xs text-body text-ink" data-i18n="nav.contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top" class="scroll-mt-14">
+
+      <!-- Hero -->
+      <section class="anchor relative flex min-h-[calc(100dvh-56px)] flex-col overflow-hidden bg-grid">
+        <div class="pointer-events-none absolute -left-32 top-16 z-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgba(212,77,245,0.16),transparent)]" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute bottom-8 left-1/3 z-0 h-[360px] w-[360px] rounded-full bg-[radial-gradient(closest-side,rgba(255,122,61,0.10),transparent)]" aria-hidden="true"></div>
+        <div class="relative z-10 mx-auto flex w-full max-w-[1199px] flex-1 flex-col justify-center px-lg pb-section pt-xxl md:pt-section">
+          <div class="max-w-2xl">
+            <p class="mb-md inline-flex items-center gap-xs rounded-pill bg-surface-1 px-md py-[7px] text-caption">
+              <span class="size-2 rounded-full bg-success" aria-hidden="true"></span>
+              <span data-i18n="hero.badge">Currently seeking a software engineer role</span>
+            </p>
+            <h1 class="font-display text-display-xxl font-medium">
+              <span data-i18n="hero.title">Software that works when reality gets messy.</span><span class="ml-2 inline-block h-[0.75em] w-[0.07em] bg-ink align-[-0.05em] animate-blink" aria-hidden="true"></span>
+            </h1>
+            <p class="mt-lg max-w-2xl text-body-lg text-ink-muted" data-i18n="hero.blurb">
+              I'm a software engineer from Rochester, NY, who completed my M.S. in Computer Science at RIT in December 2025. Lately I've been building distributed services that run in production: event pipelines that ingest telemetry from large fleets of connected devices, and real-time tools people use every day. I do my best work on small teams, owning a service from the schema to the deploy.
+            </p>
+            <div class="mt-xl flex flex-wrap items-center gap-md">
+              <a href="mailto:xiangyu.shi.dev@gmail.com" class="rounded-pill bg-primary px-[15px] py-[10px] text-button text-on-primary transition-transform active:scale-95" data-i18n="hero.email">Email me</a>
+              <a href="https://github.com/colimocha" target="_blank" rel="noopener" class="flex size-10 items-center justify-center rounded-full bg-surface-1 text-ink transition-colors hover:bg-surface-2" aria-label="GitHub">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+                </svg>
+              </a>
+              <a href="https://linkedin.com/in/xiangyu-shi" target="_blank" rel="noopener" class="flex size-10 items-center justify-center rounded-full bg-surface-1 text-ink transition-colors hover:bg-surface-2" aria-label="LinkedIn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+                </svg>
+              </a>
+              <!-- <a href="resume.pdf" class="rounded-pill bg-surface-1 px-[15px] py-[10px] text-button text-ink transition-colors hover:bg-surface-2">Resume</a> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop: full-bleed portrait in the background layer -->
+        <div class="pointer-events-none absolute inset-y-0 right-0 hidden w-[48%] lg:block" aria-hidden="true">
+          <div class="absolute -inset-10 bg-[radial-gradient(60%_60%_at_65%_40%,rgba(106,76,245,0.38),transparent_70%)]"></div>
+          <img src="images/headshot.jpg" alt="" class="relative h-full w-full object-cover object-[center_25%]" style="-webkit-mask-image: linear-gradient(to left, #000 45%, transparent 88%); mask-image: linear-gradient(to left, #000 45%, transparent 88%);">
+
+          <!-- Floating terminal -->
+          <div class="absolute bottom-lg left-md z-10 animate-floaty rounded-xl border border-hairline bg-canvas/85 p-md font-mono text-caption shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur">
+            <div class="flex gap-[6px] pb-sm">
+              <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+              <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+              <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+            </div>
+            <p class="text-ink-muted"><span class="text-success">$</span> whoami</p>
+            <p class="text-ink">Software Engineer</p>
+            <p class="mt-sm text-ink-muted"><span class="text-success">$</span> <span class="text-accent-blue">cat</span> stack.txt</p>
+            <p class="text-ink">Python · C# · TypeScript · C++ · SQL</p>
+            <p class="mt-sm text-ink-muted"><span class="text-success">$</span> <span class="inline-block h-[0.9em] w-[0.55em] bg-ink animate-blink align-[-0.1em]"></span></p>
+          </div>
+        </div>
+
+        <!-- Mobile: portrait band fading into the canvas -->
+        <div class="relative h-[62vh] lg:hidden" aria-hidden="true">
+          <div class="absolute inset-0 bg-[radial-gradient(55%_50%_at_50%_62%,rgba(106,76,245,0.32),transparent_72%)]"></div>
+          <img src="images/headshot.jpg" alt="" class="absolute inset-0 h-full w-full object-cover object-[center_25%]" style="-webkit-mask-image: linear-gradient(to top, transparent 0%, #000 60%); mask-image: linear-gradient(to top, transparent 0%, #000 60%);">
+        </div>
+      </section>
+
+      <!-- About strip -->
+      <section id="about" class="anchor relative overflow-hidden border-y border-hairline-soft bg-gradient-to-b from-canvas via-surface-1 to-canvas">
+        <div class="pointer-events-none absolute -right-24 -top-24 h-[340px] w-[340px] rounded-full bg-[radial-gradient(closest-side,rgba(212,77,240,0.12),transparent)]" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -bottom-32 left-0 h-[300px] w-[300px] rounded-full bg-[radial-gradient(closest-side,rgba(255,122,61,0.08),transparent)]" aria-hidden="true"></div>
+        <div class="relative mx-auto max-w-[1199px] px-lg py-section">
+          <div class="flex flex-wrap items-end justify-between gap-md">
+            <div>
+              <p class="font-mono text-micro text-ink-muted">~/about</p>
+              <h2 class="mt-sm font-display text-display-xl font-medium" data-i18n="about.title">About</h2>
+            </div>
+            <p class="max-w-xl text-caption text-ink-muted" data-i18n="about.subhead">A diff between what a resume says and what I'm actually like to work with.</p>
+          </div>
+
+          <article class="mt-xxl overflow-hidden rounded-xl border border-hairline bg-canvas/70">
+            <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+              <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+              <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+              <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+              <span class="ml-sm font-mono text-micro text-ink-muted">~/about.diff</span>
+            </div>
+            <div class="p-xl font-mono text-body-sm leading-relaxed">
+              <p class="text-ink-muted" data-i18n="about.diffComment">// the resume version → the actual human</p>
+              <div class="mt-md space-y-md">
+                <p><span class="select-none text-[#ff7b72]">-</span> <span class="text-[#ff7b72]" data-i18n="about.diff1">Software Engineer, M.S. in CS, 3+ years in production.</span></p>
+                <p><span class="select-none text-[#7ee787]">+</span> <span class="text-[#7ee787]" data-i18n="about.diff2">I finished my M.S. in CS at RIT in December 2025, and I'm open to software engineer roles related to full-stack, AI/ML, backend, cloud, database and front-end.</span></p>
+                <p><span class="select-none text-[#ff7b72]">-</span> <span class="text-[#ff7b72]" data-i18n="about.diff3">Designed event-driven infrastructure ingesting telemetry from a massive device fleet.</span></p>
+                <p><span class="select-none text-[#7ee787]">+</span> <span class="text-[#7ee787]" data-i18n="about.diff4">I built pipelines that move telemetry from large fleets of connected devices, and I enjoyed it.</span></p>
+                <p><span class="select-none text-[#ff7b72]">-</span> <span class="text-[#ff7b72]" data-i18n="about.diff5">Owns services end to end in small, fast-moving teams.</span></p>
+                <p><span class="select-none text-[#7ee787]">+</span> <span class="text-[#7ee787]" data-i18n="about.diff6">I'm happiest owning the whole service: schema, deploy, and the tickets that follow.</span></p>
+                <p><span class="select-none text-[#ff7b72]">-</span> <span class="text-[#ff7b72]" data-i18n="about.diff7">Applies AI across computer vision, model workflows, and LLM integration.</span></p>
+                <p><span class="select-none text-[#7ee787]">+</span> <span class="text-[#7ee787]" data-i18n="about.diff8">Lately I've been mixing in AI: computer vision, model pipelines, LLMs. I lean on AI tools to prototype faster and debug better.</span></p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Roles I'm seeking -->
+      <section id="roles" class="anchor relative overflow-hidden border-b border-hairline-soft bg-gradient-to-b from-canvas via-surface-1 to-canvas">
+        <div class="pointer-events-none absolute -left-24 top-1/4 h-[340px] w-[340px] rounded-full bg-[radial-gradient(closest-side,rgba(97,175,239,0.10),transparent)]" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -right-32 bottom-0 h-[320px] w-[320px] rounded-full bg-[radial-gradient(closest-side,rgba(80,250,123,0.07),transparent)]" aria-hidden="true"></div>
+        <div class="relative mx-auto max-w-[1199px] px-lg pb-section pt-section">
+          <div class="mb-xxl flex flex-wrap items-end justify-between gap-md">
+            <div>
+              <p class="font-mono text-micro text-ink-muted">~/roles</p>
+              <h2 class="mt-sm font-display text-display-xl font-medium" data-i18n="roles.title">Roles I'm seeking</h2>
+            </div>
+            <p class="max-w-xl text-caption text-ink-muted" data-i18n="roles.subhead">The roles I'm open to, and the skills behind each.</p>
+          </div>
+
+          <div class="grid gap-lg md:grid-cols-2">
+
+            <!-- Software Engineer -->
+            <article class="flex flex-col overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#ffb86c]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/engineer.cs</span>
+              </div>
+              <div class="flex flex-1 flex-col p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="roles.se.comment">// Software Engineer</p>
+                <h3 class="mt-sm text-headline" data-i18n="roles.se.title">Software Engineer</h3>
+                <p class="mt-md text-body text-ink-muted" data-i18n="roles.se.body">A bit of everything: production systems, clean code, work that lands on time.</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Python</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">C#</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">C++</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Java</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">SQL</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Git</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Cloud &amp; DevOps</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Distributed Systems</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">AI/ML</li>
+                </ul>
+                <div class="mt-auto flex justify-end pt-md">
+                  <a href="#contact" class="inline-flex items-center gap-xs text-caption text-accent-blue" data-i18n="roles.se.cta">Contact →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Full-Stack -->
+            <article class="flex flex-col overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#50fa7b]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/fullstack.tsx</span>
+              </div>
+              <div class="flex flex-1 flex-col p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="roles.fs.comment">// Full-Stack</p>
+                <h3 class="mt-sm text-headline" data-i18n="roles.fs.title">Full-Stack Engineer</h3>
+                <p class="mt-md text-body text-ink-muted" data-i18n="roles.fs.body">Building features from the database schema to the interface.</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">TypeScript</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">React.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Next.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Node.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Express.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">REST APIs</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">PostgreSQL</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Tailwind CSS</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Docker</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">CI/CD</li>
+                </ul>
+                <div class="mt-auto flex justify-end pt-md">
+                  <a href="https://papertab.xiangyushi.dev" target="_blank" rel="noopener" class="inline-flex items-center gap-xs text-caption text-accent-blue">Papertab →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- AI / ML -->
+            <article class="flex flex-col overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#ff79c6]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/ai-ml.py</span>
+              </div>
+              <div class="flex flex-1 flex-col p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="roles.ai.comment">// AI / ML</p>
+                <h3 class="mt-sm text-headline" data-i18n="roles.ai.title">AI/ML Engineer</h3>
+                <p class="mt-md text-body text-ink-muted" data-i18n="roles.ai.body">Applied ML and LLM work that ships: computer vision, model pipelines, and agent workflows.</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">PyTorch</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Computer Vision</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Deep Learning</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Graph Neural Networks</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">LLM Integration</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Model Evaluation</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Prompt Engineering</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Data Preprocessing</li>
+                </ul>
+                <div class="mt-auto flex justify-end pt-md">
+                  <a href="#projects" class="inline-flex items-center gap-xs text-caption text-accent-blue" data-i18n="roles.ai.cta">Projects →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Back-End -->
+            <article class="flex flex-col overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#8be9fd]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/backend.ts</span>
+              </div>
+              <div class="flex flex-1 flex-col p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="roles.be.comment">// Back-End</p>
+                <h3 class="mt-sm text-headline" data-i18n="roles.be.title">Back-End Engineer</h3>
+                <p class="mt-md text-body text-ink-muted" data-i18n="roles.be.body">APIs and services that stay fast, observable, and simple to operate.</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Node.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Express.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">NestJS</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">FastAPI</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">ASP.NET / .NET Core</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">REST APIs</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">GraphQL</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Microservices</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">RabbitMQ</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Service Bus</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">WebSockets</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">JWT</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">PostgreSQL</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">MySQL</li>
+                </ul>
+                <div class="mt-auto flex justify-end pt-md">
+                  <a href="https://github.com/colimocha" target="_blank" rel="noopener" class="inline-flex items-center gap-xs text-caption text-accent-blue">GitHub →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Database -->
+            <article class="flex flex-col overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#bd93f9]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/database.sql</span>
+              </div>
+              <div class="flex flex-1 flex-col p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="roles.db.comment">// Database</p>
+                <h3 class="mt-sm text-headline" data-i18n="roles.db.title">Database Engineer</h3>
+                <p class="mt-md text-body text-ink-muted" data-i18n="roles.db.body">Schema design, query tuning, and indexes that keep endpoints fast under real traffic.</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">PostgreSQL</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">MySQL</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Microsoft SQL Server</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">MongoDB</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Cosmos DB</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">SQLite</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Schema Design</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Indexing &amp; Query Tuning</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">KQL</li>
+                </ul>
+                <div class="mt-auto flex justify-end pt-md">
+                  <a href="#experience" class="inline-flex items-center gap-xs text-caption text-accent-blue" data-i18n="roles.db.cta">Experience →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Front-End -->
+            <article class="flex flex-col overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#61afef]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/frontend.tsx</span>
+              </div>
+              <div class="flex flex-1 flex-col p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="roles.fe.comment">// Front-End</p>
+                <h3 class="mt-sm text-headline" data-i18n="roles.fe.title">Front-End Engineer</h3>
+                <p class="mt-md text-body text-ink-muted" data-i18n="roles.fe.body">Interfaces that load fast, hold up at any screen size, and work with a screen reader.</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">React.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Next.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Angular</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Vue.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">TypeScript</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">JavaScript</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">HTML5</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">CSS3</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Tailwind CSS</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Responsive UI</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Accessibility</li>
+                </ul>
+                <div class="mt-auto flex justify-end pt-md">
+                  <a href="#projects" class="inline-flex items-center gap-xs text-caption text-accent-blue" data-i18n="roles.fe.cta">Projects →</a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section id="education" class="anchor relative overflow-hidden border-b border-hairline-soft bg-gradient-to-b from-canvas via-surface-1 to-canvas">
+        <div class="pointer-events-none absolute -left-24 top-1/4 h-[340px] w-[340px] rounded-full bg-[radial-gradient(closest-side,rgba(189,147,249,0.10),transparent)]" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -right-32 bottom-0 h-[320px] w-[320px] rounded-full bg-[radial-gradient(closest-side,rgba(141,233,253,0.07),transparent)]" aria-hidden="true"></div>
+        <div class="relative mx-auto max-w-[1199px] px-lg pb-section pt-section">
+          <div class="mb-xxl flex flex-wrap items-end justify-between gap-md">
+            <div>
+              <p class="font-mono text-micro text-ink-muted">~/education</p>
+              <h2 class="mt-sm font-display text-display-xl font-medium" data-i18n="education.title">Education</h2>
+            </div>
+            <p class="max-w-xl text-caption text-ink-muted" data-i18n="education.subhead">The degrees behind the work.</p>
+          </div>
+
+          <div class="space-y-xl">
+            <article class="overflow-hidden rounded-xl bg-canvas">
+              <div class="h-[3px] w-full bg-[#bd93f9]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/ms-cs.txt</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="edu.ms.comment">// Master of Science, Computer Science · Dec 2025</p>
+                <h4 class="mt-sm text-headline">Rochester Institute of Technology</h4>
+                <div class="mt-lg border-t border-hairline-soft pt-lg">
+                  <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="edu.coursework">// Coursework</p>
+                  <div class="mt-md grid gap-lg md:grid-cols-2 xl:grid-cols-3">
+                    <div>
+                      <p class="font-mono text-micro uppercase tracking-widest text-accent-blue" data-i18n="edu.ms.cat1">AI / Machine Learning</p>
+                      <ul class="mt-sm space-y-sm text-body text-ink-muted">
+                        <li data-i18n="edu.ms.c1"><span class="text-ink">Machine Learning &amp; AI Principles:</span> Supervised/unsupervised learning algorithms, model evaluation, and heuristic search algorithms.</li>
+                        <li data-i18n="edu.ms.c2"><span class="text-ink">Computer Vision:</span> Image processing, feature extraction, object detection, and visual recognition pipelines.</li>
+                        <li data-i18n="edu.ms.c3"><span class="text-ink">Python for AI/ML:</span> Data modeling, numerical computing, and working with Python's ML libraries.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p class="font-mono text-micro uppercase tracking-widest text-accent-blue" data-i18n="edu.ms.cat2">Data Science &amp; Data Engineering</p>
+                      <ul class="mt-sm space-y-sm text-body text-ink-muted">
+                        <li data-i18n="edu.ms.c4"><span class="text-ink">Big Data Frameworks &amp; Analytics:</span> Distributed computing, large-scale data processing, and predictive analytics.</li>
+                        <li data-i18n="edu.ms.c5"><span class="text-ink">Database Internals &amp; Storage Engines:</span> Query optimization, indexing, transaction management, and relational database implementation.</li>
+                        <li data-i18n="edu.ms.c6"><span class="text-ink">Statistical Modeling &amp; Data Mining:</span> Feature engineering, trend analysis, and SQL for analysis.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p class="font-mono text-micro uppercase tracking-widest text-accent-blue" data-i18n="edu.ms.cat3">Software Engineer / Systems &amp; Core CS</p>
+                      <ul class="mt-sm space-y-sm text-body text-ink-muted">
+                        <li data-i18n="edu.ms.c7"><span class="text-ink">Object-Oriented Design &amp; Architecture:</span> OOP, design patterns, polymorphism, and modular architecture.</li>
+                        <li data-i18n="edu.ms.c8"><span class="text-ink">Core Languages &amp; Ecosystems:</span> C#, .NET ecosystem, Java, Python, and C/C++.</li>
+                        <li data-i18n="edu.ms.c9"><span class="text-ink">Algorithms &amp; Data Structures:</span> Complexity analysis, dynamic programming, and graph algorithms.</li>
+                        <li data-i18n="edu.ms.c10"><span class="text-ink">Networking &amp; Distributed Systems:</span> Socket programming, network protocol stack (TCP/IP, HTTP), and client-server architectures.</li>
+                        <li data-i18n="edu.ms.c11"><span class="text-ink">Building a Project End to End:</span> Scoping, system design, implementation, and shipping the capstone.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="overflow-hidden rounded-xl bg-canvas">
+              <div class="h-[3px] w-full bg-[#8be9fd]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/bs-wmc.txt</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="edu.bs.comment">// Bachelor of Science, Web &amp; Mobile Computing · May 2023</p>
+                <h4 class="mt-sm text-headline">Rochester Institute of Technology</h4>
+                <div class="mt-lg border-t border-hairline-soft pt-lg">
+                  <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="edu.coursework">// Coursework</p>
+                  <div class="mt-md grid gap-lg md:grid-cols-2">
+                    <div>
+                      <p class="font-mono text-micro uppercase tracking-widest text-accent-blue" data-i18n="edu.bs.cat1">Front-End &amp; UI/UX Development</p>
+                      <ul class="mt-sm space-y-sm text-body text-ink-muted">
+                        <li data-i18n="edu.bs.c1"><span class="text-ink">Client-Side Web Engineering:</span> JavaScript (ES6+), HTML5, CSS3, DOM manipulation, and responsive web design.</li>
+                        <li data-i18n="edu.bs.c2"><span class="text-ink">UI/UX Design &amp; Prototyping:</span> Wireframing, interactive prototyping, user-centered design, and usability testing.</li>
+                        <li data-i18n="edu.bs.c3"><span class="text-ink">Digital Visual Assets:</span> Vector and raster graphics, and getting them ready to use in a UI.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p class="font-mono text-micro uppercase tracking-widest text-accent-blue" data-i18n="edu.bs.cat2">Back-End, Databases &amp; Systems</p>
+                      <ul class="mt-sm space-y-sm text-body text-ink-muted">
+                        <li data-i18n="edu.bs.c4"><span class="text-ink">Server-Side Development:</span> RESTful API design &amp; integration, server-side scripting/runtimes, and microservices.</li>
+                        <li data-i18n="edu.bs.c5"><span class="text-ink">Relational &amp; NoSQL Databases:</span> SQL development, relational schema design, normalization, and NoSQL databases.</li>
+                        <li data-i18n="edu.bs.c6"><span class="text-ink">Network &amp; Systems Fundamentals:</span> Network essentials, web server configuration, HTTP request-response lifecycle, and operating systems.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p class="font-mono text-micro uppercase tracking-widest text-accent-blue" data-i18n="edu.bs.cat3">Mobile Application Development</p>
+                      <ul class="mt-sm space-y-sm text-body text-ink-muted">
+                        <li data-i18n="edu.bs.c7"><span class="text-ink">Native &amp; Multi-Platform Mobile Apps:</span> Android/iOS native app development, activity/view lifecycles, and mobile SDK integration.</li>
+                        <li data-i18n="edu.bs.c8"><span class="text-ink">Mobile Data &amp; Cloud Integration:</span> Offline caching, local SQLite storage, push notifications, and calling remote REST APIs.</li>
+                        <li data-i18n="edu.bs.c9"><span class="text-ink">Shipping a Mobile App:</span> Adapting the UI across screen densities, testing on real devices, and launching the mobile capstone.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p class="font-mono text-micro uppercase tracking-widest text-accent-blue" data-i18n="edu.bs.cat4">Core Software Development &amp; Engineering Foundations</p>
+                      <ul class="mt-sm space-y-sm text-body text-ink-muted">
+                        <li data-i18n="edu.bs.c10"><span class="text-ink">Software Design &amp; Best Practices:</span> Design patterns, code refactoring, software quality assurance, and automated testing.</li>
+                        <li data-i18n="edu.bs.c11"><span class="text-ink">Core Programming Foundations:</span> Java development, object-oriented abstraction, and algorithmic problem-solving.</li>
+                        <li data-i18n="edu.bs.c12"><span class="text-ink">Applied Mathematics &amp; Statistics:</span> Discrete mathematics, logic, applied calculus, and inferential statistics.</li>
+                        <li data-i18n="edu.bs.c13"><span class="text-ink">Team Project Management:</span> Agile/Scrum workflows, Git version control, milestones, and presenting to stakeholders.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section id="skills" class="anchor relative overflow-hidden">
+        <div class="pointer-events-none absolute right-1/4 top-0 h-[400px] w-[400px] rounded-full bg-[radial-gradient(closest-side,rgba(80,250,123,0.08),transparent)]" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute bottom-0 left-0 h-[320px] w-[320px] rounded-full bg-[radial-gradient(closest-side,rgba(141,233,253,0.07),transparent)]" aria-hidden="true"></div>
+        <div class="relative mx-auto max-w-[1199px] px-lg pb-section pt-section">
+          <p class="font-mono text-micro text-ink-muted">~/skills</p>
+          <h2 class="mt-sm mb-xxl font-display text-display-xl font-medium" data-i18n="skills.title">Skills</h2>
+          <div class="grid gap-lg md:grid-cols-2">
+
+            <!-- Programming Languages -->
+            <article class="overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#ffb86c]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/lang.ts</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="skills.lang.comment">// Programming Languages</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Python</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">JavaScript</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">TypeScript</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Java</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">C#</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">C++</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Go</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">SQL</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- AI / ML -->
+            <article class="overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#ff79c6]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/ai-ml-vision.py</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="skills.ai.comment">// AI / ML</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">PyTorch</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Computer Vision</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Deep Learning</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Graph Neural Networks</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">LLM Integration</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Generative AI</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">LLM fine-tuning</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Prompt Engineering</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Model Evaluation</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Data Preprocessing</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">TensorFlow</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">scikit-learn</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- AI Tools -->
+            <article class="overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#50fa7b]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/tools.md</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="skills.aitools.comment">// AI Tools</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Cursor</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Claude Code</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">ChatGPT</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">GitHub Copilot</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Gemini</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Agent Workflows</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Back End -->
+            <article class="overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#8be9fd]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/backend.ts</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="skills.be.comment">// Back End</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Node.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Express.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">REST APIs</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">FastAPI</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">.NET Core</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">ASP.NET Web APIs</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">NestJS</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">GraphQL</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Microservices</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">RabbitMQ</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Service Bus</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">WebSockets</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">JWT</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Front End -->
+            <article class="overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#61afef]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/frontend.tsx</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="skills.fe.comment">// Front End</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">React.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Next.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Angular</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Vue.js</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">HTML5</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">CSS3</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Tailwind CSS</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Responsive UI</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Accessibility</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Databases & Data -->
+            <article class="overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#bd93f9]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/db.sql</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="skills.db.comment">// Databases &amp; Data</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">PostgreSQL</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">MongoDB</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Cosmos DB</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Microsoft SQL Server</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">MySQL</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">SQLite</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">KQL</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">NoSQL</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Cloud & DevOps -->
+            <article class="overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#ff5555]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/cloud-devops.yml</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="skills.cloud.comment">// Cloud &amp; DevOps</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Azure</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Azure Functions</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Azure Container Apps</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Azure Service Bus</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Azure Event Hubs</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Docker</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Kubernetes</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Linux</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Git</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">GitHub Actions</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">CI/CD</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Testing -->
+            <article class="overflow-hidden rounded-xl bg-surface-1">
+              <div class="h-[3px] w-full bg-[#f1fa8c]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/tests.test.ts</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="skills.test.comment">// Testing</p>
+                <ul class="mt-md flex flex-wrap gap-xs">
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Jest</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">pytest</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">JUnit</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">xUnit</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Unit Testing</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">E2E Testing</li>
+                  <li class="rounded-pill bg-canvas px-md py-[6px] text-caption">Test Case Design</li>
+                </ul>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section id="experience" class="anchor relative overflow-hidden border-y border-hairline-soft bg-gradient-to-b from-canvas via-surface-1 to-canvas">
+        <div class="pointer-events-none absolute -left-24 top-1/4 h-[380px] w-[380px] rounded-full bg-[radial-gradient(closest-side,rgba(255,121,198,0.10),transparent)]" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -right-32 bottom-0 h-[340px] w-[340px] rounded-full bg-[radial-gradient(closest-side,rgba(255,184,108,0.08),transparent)]" aria-hidden="true"></div>
+        <div class="relative mx-auto grid max-w-[1199px] gap-xxl px-lg py-section md:grid-cols-[1fr_1.4fr]">
+          <div>
+            <p class="font-mono text-micro text-ink-muted">~/experience</p>
+            <h2 class="mt-sm font-display text-display-xl font-medium" data-i18n="experience.title">Experience</h2>
+            <p class="mt-md text-body text-ink-muted" data-i18n="experience.subhead">Where I've built software that people actually use.</p>
+          </div>
+          <div class="space-y-xl">
+            <article class="overflow-hidden rounded-xl bg-canvas">
+              <div class="h-[3px] w-full bg-[#61afef]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/ortusify.ts</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="exp.ortusify.comment">// Software Engineer · Jan 2026 – Present</p>
+                <h3 class="mt-sm text-headline">Ortusify LLC</h3>
+                <p class="mt-md text-body-sm text-ink-muted" data-i18n="exp.ortusify.body">I managed backend features for multiple client web apps on <span class="text-accent-blue">Next.js</span> and <span class="text-accent-blue">PostgreSQL</span>, from schema design through production. I reduced our paginated admin listing load times nearly threefold with <span class="text-accent-blue">keyset pagination</span> and <span class="text-accent-blue">covering indexes</span>, and shipped dozens of <span class="text-accent-blue">REST endpoints</span> that stayed in the tens of milliseconds at <span class="text-accent-blue">p95</span> under real traffic.</p>
+                <p class="mt-md font-mono text-micro text-ink-muted">Next.js · PostgreSQL · TypeScript</p>
+              </div>
+            </article>
+            <article class="overflow-hidden rounded-xl bg-canvas">
+              <div class="h-[3px] w-full bg-[#bd93f9]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/tigerchat.cs</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="exp.tigerchat.comment">// Software Engineer (Part-Time) · Aug 2022 – Dec 2024</p>
+                <h3 class="mt-sm text-headline"><a href="https://www.rit.edu/accesstechnology/" target="_blank" rel="noopener" class="inline-flex items-center gap-[5px] text-accent-blue underline underline-offset-2">Center on Access Technology<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M15 3h6v6" />
+                      <path d="M10 14 21 3" />
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    </svg></a>, RIT/NTID</h3>
+                <p class="mt-md text-body-sm text-ink-muted" data-i18n="exp.tigerchat.body"><a href="https://www.rit.edu/accesstechnology/tigerchat" target="_blank" rel="noopener" class="inline-flex items-center gap-[5px] text-accent-blue underline underline-offset-2">TigerChat<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M15 3h6v6" />
+                      <path d="M10 14 21 3" />
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    </svg></a> is a real-time speech-to-text captioning app in <span class="text-accent-blue">C#</span> and <span class="text-accent-blue">.NET Core</span> that I built with the team; it streams captions to students over <span class="text-accent-blue">WebSockets</span>, with <span class="text-accent-blue">RabbitMQ</span> in the message pipeline. Deaf and hard-of-hearing students relied on it across campus. I also ran <span class="text-accent-blue">accessibility</span> test cycles for <a href="https://www.popsign.org/" target="_blank" rel="noopener" class="inline-flex items-center gap-[5px] text-accent-blue underline underline-offset-2">PopSign<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M15 3h6v6" />
+                      <path d="M10 14 21 3" />
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    </svg></a>, an ASL learning app from the Georgia Tech and Google teams.</p>
+                <p class="mt-md font-mono text-micro text-ink-muted">C# · .NET Core · RabbitMQ · WebSockets · Accessibility</p>
+              </div>
+            </article>
+            <article class="overflow-hidden rounded-xl bg-canvas">
+              <div class="h-[3px] w-full bg-[#ff5555]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/iot-telemetry.cs</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="exp.ecolab.comment">// Software Engineer Intern · Jan 2024 – Aug 2024</p>
+                <h3 class="mt-sm text-headline">Ecolab</h3>
+                <p class="mt-md text-body-sm text-ink-muted" data-i18n="exp.ecolab.body">I built serverless pipelines in <span class="text-accent-blue">C#</span> on <span class="text-accent-blue">Azure Functions</span>, <span class="text-accent-blue">Event Hubs</span>, and <span class="text-accent-blue">Service Bus</span> that moved telemetry from large fleets of connected devices into <span class="text-accent-blue">Cosmos DB</span> and exposed it over <span class="text-accent-blue">REST</span>. Hardware contracts became stable, versioned API schemas. I deployed the services as containers on <span class="text-accent-blue">Azure Container Apps</span>, and the <span class="text-accent-blue">xUnit</span> suite kept up as the schemas evolved. Coverage stayed near complete. When devices failed in the field, I investigated telemetry in <span class="text-accent-blue">Azure Data Explorer (KQL)</span> to identify root causes and resolve production incidents.</p>
+                <p class="mt-md font-mono text-micro text-ink-muted">C# · .NET Core · xUnit · Azure Functions · Event Hubs · Service Bus · Cosmos DB · Container Apps · KQL</p>
+              </div>
+            </article>
+            <article class="overflow-hidden rounded-xl bg-canvas">
+              <div class="h-[3px] w-full bg-[#ffb86c]"></div>
+              <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-ink-muted">~/chess-api.js</span>
+              </div>
+              <div class="p-lg">
+                <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="exp.chess.comment">// Software Developer Intern · Jan 2022 – Aug 2022</p>
+                <h3 class="mt-sm text-headline">CHESS Health</h3>
+                <p class="mt-md text-body-sm text-ink-muted" data-i18n="exp.chess.body">I built backend services in <span class="text-accent-blue">Express.js</span> and <span class="text-accent-blue">ASP.NET Web API</span> for a behavioral health platform, with dozens of <span class="text-accent-blue">REST endpoints</span> across <span class="text-accent-blue">MySQL</span>, <span class="text-accent-blue">MS SQL Server</span>, and <span class="text-accent-blue">MongoDB</span>. On the front end, I shipped features and closed out tickets across the <span class="text-accent-blue">Angular</span>, <span class="text-accent-blue">React</span>, and <span class="text-accent-blue">Vue.js</span> clients, with <span class="text-accent-blue">Jest</span> covering the test suite.</p>
+                <p class="mt-md font-mono text-micro text-ink-muted">Node.js · Express.js · Jest · ASP.NET · MySQL · MongoDB</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="anchor relative overflow-hidden">
+        <div class="pointer-events-none absolute -top-24 left-1/4 h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgba(97,175,239,0.10),transparent)]" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute bottom-0 right-0 h-[360px] w-[360px] rounded-full bg-[radial-gradient(closest-side,rgba(189,147,249,0.08),transparent)]" aria-hidden="true"></div>
+        <div class="relative mx-auto max-w-[1199px] px-lg pb-section pt-section">
+          <div class="mb-xxl flex flex-wrap items-end justify-between gap-md">
+            <div>
+              <p class="font-mono text-micro text-ink-muted">~/projects</p>
+              <h2 class="mt-sm font-display text-display-xl font-medium" data-i18n="projects.title">Selected projects</h2>
+            </div>
+            <a href="https://github.com/colimocha" target="_blank" rel="noopener" class="inline-flex items-center gap-xs text-caption text-accent-blue"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+              </svg>github.com/colimocha →</a>
+          </div>
+
+          <div class="grid gap-lg md:grid-cols-2">
+
+            <!-- Papertab — flagship terminal window -->
+            <article class="flex flex-col overflow-hidden rounded-xxl bg-code-violet">
+              <div class="flex items-center gap-xs border-b border-white/15 px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-white/80">~/papertab.ts</span>
+              </div>
+              <div class="flex flex-1 flex-col p-xl">
+                <p class="font-mono text-micro uppercase tracking-widest text-white/80" data-i18n="projects.papertab.comment">// Full-stack · Live app</p>
+                <h3 class="mt-sm font-display text-display-md font-medium">Papertab</h3>
+                <p class="mt-md text-subhead" data-i18n="projects.papertab.body">
+                  Splitting the bill "evenly" is lazy and usually wrong. Papertab lets you add a receipt and check off exactly what each person ordered; it works out individual tax and tip, tracks who's paid, and shows who still owes what, down to the cent. No more awkward arithmetic at the table.
+                </p>
+                <div class="mt-auto flex flex-wrap items-center justify-between gap-md pt-lg">
+                  <p class="font-mono text-micro text-white/80">Next.js · TypeScript · Tailwind CSS</p>
+                  <a href="https://papertab.xiangyushi.dev" target="_blank" rel="noopener" class="rounded-pill bg-primary px-[15px] py-[10px] text-button text-on-primary transition-transform active:scale-95" data-i18n="projects.papertab.cta">Visit Papertab →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Chinese character recognition — magenta terminal window -->
+            <article class="flex flex-col overflow-hidden rounded-xxl bg-code-emerald">
+              <div class="flex items-center gap-xs border-b border-white/15 px-md py-[10px]">
+                <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                <span class="ml-sm font-mono text-micro text-white/80">~/handwriting-gcn.py</span>
+              </div>
+              <div class="flex flex-1 flex-col p-xl">
+                <p class="font-mono text-micro uppercase tracking-widest text-white/80" data-i18n="projects.cr.comment">// M.S. Capstone · Jan 2025 – Dec 2025</p>
+                <h3 class="mt-sm font-display text-display-md font-medium" data-i18n="projects.cr.title">AI-Powered Chinese Character Recognition &amp; Learning System</h3>
+                <p class="mt-md text-subhead" data-i18n="projects.cr.body">
+                  For my M.S. capstone I built a system that reads Chinese handwriting. I model each character as a stroke graph and trained a Graph Convolutional Network in PyTorch Geometric that hit 99.0% top-1 accuracy across 2,000 character classes on CASIA-HWDB. I took it all the way from Apple Pencil ink to a model running locally on my M1 Mac at around 11 characters per second.
+                </p>
+                <p class="mt-auto pt-lg font-mono text-micro text-white/80">Python · PyTorch Geometric · Graph Neural Networks · Computer Vision</p>
+              </div>
+            </article>
+
+            <!-- More projects -->
+            <div class="md:col-span-2">
+              <p class="font-mono text-micro text-ink-muted">~/more-projects</p>
+              <h3 class="mt-sm text-caption uppercase tracking-widest text-ink-muted" data-i18n="projects.more.title">More projects</h3>
+              <div class="mt-md grid gap-lg md:grid-cols-3">
+
+                <article class="flex flex-col overflow-hidden rounded-xl bg-surface-1">
+                  <div class="h-[3px] w-full bg-[#61afef]"></div>
+                  <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                    <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                    <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                    <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                    <span class="ml-sm font-mono text-micro text-ink-muted">~/newworld.ts</span>
+                  </div>
+                  <div class="flex flex-1 flex-col p-lg">
+                    <p class="font-mono text-micro uppercase tracking-widest text-ink-muted" data-i18n="projects.nw.comment">// B.S. Capstone · Aug 2022 – May 2023</p>
+                    <h4 class="mt-sm text-headline" data-i18n="projects.nw.title">New World — Board Game Competition Platform</h4>
+                    <p class="mt-md text-body text-ink-muted" data-i18n="projects.nw.body">A full-stack platform for board-game competitions that our capstone team built on Next.js and NestJS. I designed dozens of PostgreSQL-backed REST endpoints with JWT auth and role-based permissions, and it carried a hundred concurrent users through a live tournament.</p>
+                    <p class="mt-auto pt-md font-mono text-micro text-ink-muted">Next.js · NestJS · PostgreSQL</p>
+                  </div>
+                </article>
+
+                <article class="flex flex-col overflow-hidden rounded-xl bg-surface-1">
+                  <div class="h-[3px] w-full bg-[#ff5555]"></div>
+                  <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                    <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                    <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                    <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                    <span class="ml-sm font-mono text-micro text-ink-muted">~/http-server.cpp</span>
+                  </div>
+                  <div class="flex flex-1 flex-col p-lg">
+                    <p class="font-mono text-micro uppercase tracking-widest text-ink-muted">// C++17 · Linux</p>
+                    <h4 class="mt-sm text-headline">multiple-thread-http-server</h4>
+                    <p class="mt-md text-body text-ink-muted" data-i18n="projects.http.body">An HTTP/1.1 server written from scratch in C++17 with a single-Reactor thread pool, edge-triggered epoll dispatch, hand-rolled HTTP parsing, and async logging. Mostly my way of understanding what actually sits underneath frameworks.</p>
+                    <div class="mt-auto flex flex-wrap items-center justify-between gap-md pt-md">
+                      <p class="font-mono text-micro text-ink-muted">epoll · Reactor pattern</p>
+                      <a href="https://github.com/colimocha/multiple-thread-http-server" target="_blank" rel="noopener" class="inline-flex items-center gap-xs text-caption text-accent-blue"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                          <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+                        </svg>GitHub →</a>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="flex flex-col overflow-hidden rounded-xl bg-surface-1">
+                  <div class="h-[3px] w-full bg-[#50fa7b]"></div>
+                  <div class="flex items-center gap-xs border-b border-hairline-soft px-md py-[10px]">
+                    <span class="size-[10px] rounded-full bg-[#ff5555]"></span>
+                    <span class="size-[10px] rounded-full bg-[#f1fa8c]"></span>
+                    <span class="size-[10px] rounded-full bg-[#50fa7b]"></span>
+                    <span class="ml-sm font-mono text-micro text-ink-muted">~/research-agent.py</span>
+                  </div>
+                  <div class="flex flex-1 flex-col p-lg">
+                    <p class="font-mono text-micro uppercase tracking-widest text-ink-muted">// Python · AI agents</p>
+                    <h4 class="mt-sm text-headline">agentic-research-assistant</h4>
+                    <p class="mt-md text-body text-ink-muted" data-i18n="projects.agent.body">A CLI agent that keeps going until it actually answers the question. It searches the web, does exact math, and keeps notes in a persistent notebook across steps.</p>
+                    <div class="mt-auto flex flex-wrap items-center justify-between gap-md pt-md">
+                      <p class="font-mono text-micro text-ink-muted">LLM integration · CLI</p>
+                      <a href="https://github.com/colimocha/agentic-research-assistant" target="_blank" rel="noopener" class="inline-flex items-center gap-xs text-caption text-accent-blue"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                          <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+                        </svg>GitHub →</a>
+                    </div>
+                  </div>
+                </article>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Contact / footer -->
+    <footer id="contact" class="anchor relative overflow-hidden border-t border-hairline-soft bg-canvas px-lg pb-xxl pt-section">
+      <div class="pointer-events-none absolute -top-32 right-1/4 h-[380px] w-[380px] rounded-full bg-[radial-gradient(closest-side,rgba(255,122,61,0.10),transparent)]" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute bottom-0 left-1/3 h-[300px] w-[300px] rounded-full bg-[radial-gradient(closest-side,rgba(106,76,245,0.08),transparent)]" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-[1199px]">
+        <p class="font-mono text-micro text-ink-muted">~/contact</p>
+        <p class="mt-sm text-caption uppercase tracking-widest text-ink-muted" data-i18n="contact.exploring">What I keep chewing on</p>
+        <ul class="mt-md space-y-xs text-body text-ink-muted">
+          <li data-i18n="contact.item1">How much of a service can one person actually own?</li>
+          <li data-i18n="contact.item2">Where do AI tools genuinely help, and where do they just move the work around?</li>
+          <li data-i18n="contact.item3">Why do so many web apps still lock people out?</li>
+        </ul>
+        <h2 class="mt-xxl max-w-3xl font-display text-display-xl font-medium" data-i18n="contact.headline">If you're building something and it's harder than it should be, that's the part I like. Email me.</h2>
+        <p class="mt-md text-caption text-ink-muted" data-i18n="contact.location">Rochester, NY. Open to software engineering roles across the stack, and I answer email faster than I should</p>
+        <div class="mt-xl flex flex-wrap items-center gap-md">
+          <a href="mailto:xiangyu.shi.dev@gmail.com" class="inline-flex items-center gap-xs rounded-pill bg-primary px-[15px] py-[10px] text-button text-on-primary transition-transform active:scale-95"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="20" height="16" x="2" y="4" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>xiangyu.shi.dev@gmail.com</a>
+          <a href="https://github.com/colimocha" target="_blank" rel="noopener" class="inline-flex items-center gap-xs rounded-pill bg-surface-1 px-[15px] py-[10px] text-button text-ink transition-colors hover:bg-surface-2"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+            </svg>GitHub</a>
+          <a href="https://linkedin.com/in/xiangyu-shi" target="_blank" rel="noopener" class="inline-flex items-center gap-xs rounded-pill bg-surface-1 px-[15px] py-[10px] text-button text-ink transition-colors hover:bg-surface-2"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+            </svg>LinkedIn</a>
+        </div>
+        <div class="mt-xxl flex flex-wrap items-center justify-between gap-md border-t border-hairline-soft pt-lg">
+          <p class="text-caption text-ink-muted">© <span data-year></span> <span data-i18n="footer.copy">Xiangyu Shi. All rights reserved.</span></p>
+          <!-- <a href="resume.pdf" class="text-caption text-accent-blue">Resume PDF →</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script src="lib/i18n.js"></script>
+    <script>
+      (function () {
+        var els = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+        els.forEach(function (el) { el._originalHTML = el.innerHTML; });
+
+        var current = document.documentElement.getAttribute('data-lang') || 'en';
+
+        function updateLangUI(lang) {
+          var label = document.querySelector('[data-lang-current]');
+          if (label) label.textContent = lang === 'zh' ? '中文' : 'EN';
+          document.querySelectorAll('[data-lang]').forEach(function (btn) {
+            btn.setAttribute('aria-checked', String(btn.getAttribute('data-lang') === lang));
+          });
+        }
+
+        function applyLang(lang) {
+          els.forEach(function (el) {
+            var key = el.getAttribute('data-i18n');
+            if (lang === 'zh') {
+              var v = window.I18N && window.I18N.zh && window.I18N.zh[key];
+              if (v == null) return;
+              el[v.indexOf('<') === -1 ? 'textContent' : 'innerHTML'] = v;
+            } else {
+              el.innerHTML = el._originalHTML;
+            }
+          });
+          var meta = window.I18N && window.I18N.meta;
+          if (meta && meta.title[lang]) document.title = meta.title[lang];
+          var desc = document.querySelector('meta[name="description"]');
+          if (desc && meta && meta.description[lang]) desc.setAttribute('content', meta.description[lang]);
+          document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+          document.documentElement.setAttribute('data-lang', lang);
+          current = lang;
+          updateLangUI(lang);
+        }
+
+        // Language dropdown
+        var langToggle = document.querySelector('[data-lang-toggle]');
+        var langMenu = document.querySelector('[data-lang-menu]');
+        function closeLang() {
+          langMenu.classList.add('hidden');
+          langToggle.setAttribute('aria-expanded', 'false');
+        }
+        langToggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var open = langMenu.classList.toggle('hidden') === false;
+          langToggle.setAttribute('aria-expanded', String(open));
+        });
+        langMenu.querySelectorAll('[data-lang]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var lang = btn.getAttribute('data-lang');
+            applyLang(lang);
+            try { localStorage.setItem('lang', lang); } catch (e) { }
+            closeLang();
+          });
+        });
+        document.addEventListener('click', function (e) {
+          if (e.target !== langToggle && !langToggle.contains(e.target) && !langMenu.contains(e.target)) closeLang();
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeLang();
+        });
+
+        // Mobile menu
+        var menuToggle = document.querySelector('[data-menu-toggle]');
+        var mobileMenu = document.querySelector('[data-menu]');
+        menuToggle.addEventListener('click', function () {
+          var open = mobileMenu.classList.toggle('hidden') === false;
+          menuToggle.setAttribute('aria-expanded', String(open));
+        });
+        mobileMenu.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            mobileMenu.classList.add('hidden');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+
+        document.querySelector('[data-year]').textContent = new Date().getFullYear();
+
+        applyLang(current);
+        document.documentElement.classList.remove('i18n-pending');
+      })();
+    </script>
+  </body>
+
+</html>
